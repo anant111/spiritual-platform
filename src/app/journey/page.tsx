@@ -5,21 +5,21 @@ import { ArrowRight } from 'lucide-react';
 export default function JourneysPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
-      <h1 className="text-xl font-bold text-stone-800 mb-1">Spiritual Journeys</h1>
-      <p className="text-sm text-stone-500 mb-6">Step-by-step paths to go deeper in your practice.</p>
+      <h1 className="text-xl font-bold text-ivory mb-1">Spiritual Journeys</h1>
+      <p className="text-sm text-stone mb-6">Step-by-step paths to go deeper in your practice.</p>
 
-      <div className="space-y-4">
+      <div className="space-y-2">
         {journeyPaths.map((journey) => (
           <Link
             key={journey.id}
             href={`/journey/${journey.id}`}
-            className="block bg-white rounded-xl border border-stone-200 p-5 hover:border-orange-300 hover:shadow-sm transition-all"
+            className="flex items-center justify-between bg-temple border border-dusk rounded-xl p-4 hover:border-saffron/50 transition-colors"
           >
-            <h2 className="text-base font-semibold text-stone-800">{journey.title}</h2>
-            <p className="text-sm text-stone-500 mt-1">{journey.description}</p>
-            <div className="flex items-center gap-1 mt-2 text-xs text-orange-600 font-medium">
-              {journey.steps.length} steps <ArrowRight className="w-3 h-3" />
+            <div>
+              <h2 className="text-sm font-semibold text-ivory">{journey.title}</h2>
+              <p className="text-xs text-moon mt-0.5">{journey.steps.length} steps</p>
             </div>
+            <ArrowRight className="w-4 h-4 text-moon" />
           </Link>
         ))}
       </div>

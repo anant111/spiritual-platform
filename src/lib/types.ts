@@ -12,7 +12,6 @@ export interface Video {
 export interface Category {
   id: string;
   name: string;
-  nameHindi: string;
   icon: string;
   description: string;
   youtubeQuery: string;
@@ -23,7 +22,6 @@ export interface SpiritualNeed {
   id: string;
   icon: string;
   title: string;
-  titleHindi: string;
   description: string;
   youtubeQuery: string;
 }
@@ -46,7 +44,6 @@ export interface JourneyStep {
 export interface ProblemSolution {
   id: string;
   problem: string;
-  problemHindi: string;
   icon: string;
   description: string;
   traditionContext: string;

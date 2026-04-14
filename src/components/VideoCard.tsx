@@ -1,6 +1,3 @@
-'use client';
-
-import { ArrowRight, Share2 } from 'lucide-react';
 import Link from 'next/link';
 
 interface Props {
@@ -13,49 +10,31 @@ interface Props {
     viewCount: string;
     category?: string;
   };
+  variant?: 'square' | 'landscape';
 }
 
-export function VideoCard({ video }: Props) {
+export function VideoCard({ video, variant = 'square' }: Props) {
   return (
-    <div className="bg-white rounded-xl border border-stone-200 overflow-hidden hover:shadow-md transition-shadow">
-      <Link href={`/watch/${video.id}`} className="relative block aspect-video">
+    <Link href={`/watch/${video.id}`} className="group block">
+      <div className={`relative overflow-hidden rounded-lg ${variant === 'square' ? 'aspect-square' : 'aspect-video'}`}>
         <img
           src={video.thumbnail}
           alt={video.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
         {video.duration && (
-          <span className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">
+          <span className="absolute bottom-1.5 right-1.5 bg-black/80 text-white text-[10px] px-1.5 py-0.5 rounded font-medium">
             {video.duration}
           </span>
         )}
-      </Link>
-
-      <div className="p-3">
-        <Link href={`/watch/${video.id}`}>
-          <h3 className="text-sm font-medium text-stone-800 line-clamp-2 mb-1 hover:text-orange-600">
-            {video.title}
-          </h3>
-        </Link>
-        <p className="text-xs text-stone-500">{video.channelTitle}</p>
-        {video.viewCount && <p className="text-xs text-stone-400">{video.viewCount}</p>}
-
-        <div className="flex items-center justify-between mt-3 pt-2 border-t border-stone-100">
-          <Link
-            href={`/watch/${video.id}`}
-            className="flex items-center gap-1 text-xs text-orange-600 hover:text-orange-700 font-medium"
-          >
-            <ArrowRight className="w-3 h-3" /> Continue →
-          </Link>
-          <button
-            onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(video.title + '\nhttps://youtube.com/watch?v=' + video.id)}`, '_blank')}
-            className="flex items-center gap-1 text-xs text-green-600 hover:text-green-700"
-          >
-            <Share2 className="w-3 h-3" /> Share
-          </button>
-        </div>
       </div>
-    </div>
+      <div className="mt-2">
+        <h3 className="text-sm font-medium text-ivory line-clamp-2 leading-snug group-hover:text-saffron transition-colors">
+          {video.title}
+        </h3>
+        <p className="text-xs text-moon mt-1">{video.channelTitle}</p>
+      </div>
+    </Link>
   );
 }

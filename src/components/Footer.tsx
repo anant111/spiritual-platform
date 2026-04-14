@@ -11,17 +11,17 @@ export function Footer() {
   const blessing = blessings[today % blessings.length];
 
   return (
-    <footer className="bg-stone-900 text-stone-400 py-8 mt-12">
+    <footer className="bg-temple border-t border-dusk py-8 mt-8">
       <div className="max-w-5xl mx-auto px-4">
-        <div className="bg-stone-800/50 rounded-xl p-4 mb-6 border border-stone-700">
-          <p className="text-sm text-stone-300 text-center italic">{blessing}</p>
+        <div className="bg-altar/50 rounded-xl p-4 mb-6 border border-dusk">
+          <p className="text-sm text-stone text-center italic">{blessing}</p>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div>
-            <p className="text-lg font-semibold text-stone-200">🕉️ Shraddha</p>
-            <p className="text-xs text-stone-500 mt-1">Your Spiritual Journey</p>
+            <p className="text-lg font-semibold text-ivory">🕉️ Shraddha</p>
+            <p className="text-xs text-moon mt-1">Your Spiritual Journey</p>
           </div>
-          <div className="text-center text-xs text-stone-500">
+          <div className="text-center text-xs text-moon">
             <p>All videos embedded from YouTube. Copyright belongs to original creators.</p>
             <p className="mt-1">Made with devotion for seekers everywhere.</p>
           </div>

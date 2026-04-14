@@ -4,7 +4,6 @@ export const categories: Category[] = [
   {
     id: 'bhajans',
     name: 'Bhajans & Aartis',
-    nameHindi: 'भजन और आरती',
     icon: '🙏',
     description: 'Devotional songs and daily prayers from Krishna, Shiva, Hanuman, and Devi traditions',
     youtubeQuery: 'hanuman chalisa krishna bhajan shiva aarti morning aarti daily devotional',
@@ -13,7 +12,6 @@ export const categories: Category[] = [
   {
     id: 'gita',
     name: 'Gita & Vedic Wisdom',
-    nameHindi: 'गीता और वैदिक ज्ञान',
     icon: '📖',
     description: 'Bhagavad Gita chapter-by-chapter, Vedic teachings, and Upanishad discourses',
     youtubeQuery: 'bhagavad gita chapter explained vedic wisdom upanishad swami sarvapriyananda',
@@ -22,7 +20,6 @@ export const categories: Category[] = [
   {
     id: 'meditation',
     name: 'Meditation & Mantra',
-    nameHindi: 'ध्यान और मंत्र',
     icon: '🧘',
     description: 'Guided meditation, om chanting, mantra japa, and sleep mantras for inner peace',
     youtubeQuery: 'guided meditation hindi om chanting mantra meditation deep relaxation',
@@ -31,7 +28,6 @@ export const categories: Category[] = [
   {
     id: 'astrology',
     name: 'Jyotish & Panchang',
-    nameHindi: 'ज्योतिष और पंचांग',
     icon: '⭐',
     description: 'Vedic astrology guidance, daily panchang, rashi predictions, and muhurat timings',
     youtubeQuery: 'vedic astrology daily panchang rashi muhurat guidance today',
@@ -40,7 +36,6 @@ export const categories: Category[] = [
   {
     id: 'talks',
     name: 'Guru Wisdom',
-    nameHindi: 'गुरु वाणी',
     icon: '💬',
     description: 'Life wisdom from Sadhguru, Sri Sri Ravi Shankar, and other spiritual masters',
     youtubeQuery: 'sadhguru spiritual wisdom life guidance guru sri sri ravi shankar',

@@ -3,127 +3,137 @@ import { spiritualNeeds } from '@/lib/spiritual-needs';
 import { problemSolutions } from '@/lib/problem-solutions';
 import { journeyPaths } from '@/lib/journey-paths';
 import { VideoCard } from '@/components/VideoCard';
+import { ContentRail } from '@/components/ContentRail';
+import { HeroCarousel } from '@/components/HeroCarousel';
 import { searchByQuery } from '@/lib/youtube';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-async function getFeatured() {
-  try {
-    return await searchByQuery('hanuman chalisa morning OR bhagavad gita chapter 1 OR om chanting meditation', 6);
-  } catch {
-    return [];
-  }
+async function getCarouselSlides() {
+  return spiritualNeeds.map((need) => ({
+    id: need.id,
+    title: need.title,
+    description: need.description,
+    thumbnail: '',
+    youtubeQuery: need.youtubeQuery,
+    icon: need.icon,
+  }));
+}
+
+async function getRails() {
+  const [featured, bhajans, meditation, gita, talks] = await Promise.all([
+    searchByQuery('spiritual wisdom morning peace devotion', 15).catch(() => []),
+    searchByQuery('hanuman chalisa krishna bhajan devotional', 15).catch(() => []),
+    searchByQuery('guided meditation om chanting mantra', 15).catch(() => []),
+    searchByQuery('bhagavad gita chapter explained vedanta', 15).catch(() => []),
+    searchByQuery('sadhguru spiritual wisdom life guidance', 15).catch(() => []),
+  ]);
+
+  return [
+    { title: 'Featured for You', videos: featured, href: '/search?q=spiritual+wisdom' },
+    { title: 'Bhajans & Devotion', videos: bhajans, href: '/bhajans' },
+    { title: 'Meditation & Mantra', videos: meditation, href: '/meditation' },
+    { title: 'Gita & Vedic Wisdom', videos: gita, href: '/gita' },
+    { title: 'Guru Wisdom', videos: talks, href: '/talks' },
+  ];
 }
 
 export default async function HomePage() {
-  const featured = await getFeatured();
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? 'Suprabhat 🌅' : hour < 17 ? 'Namaste ☀️' : 'Shubh Sandhya 🌙';
+  const slides = await getCarouselSlides();
+  const rails = await getRails();
 
-  const todaySolutions = problemSolutions.slice(0, 3);
-  const todayJourney = journeyPaths[0];
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
+    <div>
+      {/* Hero Carousel — edge to edge */}
+      <HeroCarousel slides={slides} />
+
       {/* Greeting */}
-      <section className="mb-10">
-        <h1 className="text-2xl font-bold text-stone-800">{greeting}</h1>
-        <p className="text-stone-500 mt-1 text-sm">Where would you like your journey to go today?</p>
-      </section>
+      <div className="px-4 mt-6 mb-4">
+        <h1 className="text-xl font-bold text-ivory">{greeting}</h1>
+        <p className="text-sm text-stone mt-0.5">Where would you like your journey to go today?</p>
+      </div>
 
-      {/* Intent Selector */}
-      <section className="mb-10">
-        <h2 className="text-base font-semibold text-stone-800 mb-3">What resonates with you today?</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
-          {spiritualNeeds.map((need) => (
-            <Link
-              key={need.id}
-              href={`/search?q=${encodeURIComponent(need.youtubeQuery)}`}
-              className="bg-white rounded-xl border border-stone-200 p-3 text-center hover:border-orange-300 hover:shadow-sm transition-all"
-            >
-              <span className="text-2xl block mb-1">{need.icon}</span>
-              <span className="text-xs font-medium block">{need.title}</span>
-              <span className="text-xs text-stone-400 block">{need.titleHindi}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* Quick Intent Buttons */}
+      <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 mb-8">
+        {spiritualNeeds.map((need) => (
+          <Link
+            key={need.id}
+            href={`/search?q=${encodeURIComponent(need.youtubeQuery)}`}
+            className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-temple border border-dusk rounded-full text-sm font-medium text-ivory hover:border-saffron hover:text-saffron transition-colors"
+          >
+            <span>{need.icon}</span> {need.title}
+          </Link>
+        ))}
+      </div>
 
-      {/* Problem-Solver */}
-      <section className="mb-10">
-        <h2 className="text-base font-semibold text-stone-800 mb-3">Find spiritual help for</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {todaySolutions.map((sol) => (
+      {/* Find Help */}
+      <div className="px-4 mb-8">
+        <h2 className="text-base font-semibold text-ivory mb-3">Find spiritual help</h2>
+        <div className="grid grid-cols-1 gap-2">
+          {problemSolutions.slice(0, 3).map((sol) => (
             <Link
               key={sol.id}
               href={`/help/${sol.id}`}
-              className="bg-white rounded-xl border border-stone-200 p-4 hover:border-orange-300 hover:shadow-sm transition-all"
+              className="flex items-center gap-3 bg-temple border border-dusk rounded-xl p-3 hover:border-saffron/50 transition-colors"
             >
-              <div className="flex items-start gap-3">
-                <span className="text-2xl shrink-0">{sol.icon}</span>
-                <div>
-                  <p className="text-sm font-medium text-stone-800">{sol.problem}</p>
-                  <p className="text-xs text-stone-500 mt-0.5">{sol.description}</p>
-                </div>
+              <span className="text-2xl shrink-0">{sol.icon}</span>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-ivory">{sol.problem}</p>
+                <p className="text-xs text-moon truncate">{sol.description}</p>
               </div>
+              <ArrowRight className="w-4 h-4 text-moon shrink-0" />
             </Link>
           ))}
         </div>
-        <Link href="/help" className="flex items-center gap-1 text-xs text-orange-600 mt-3 hover:text-orange-700">
-          See all problems and solutions <ArrowRight className="w-3 h-3" />
+        <Link href="/help" className="flex items-center gap-1 text-xs text-saffron mt-2 hover:text-saffron-deep font-medium">
+          See all problems <ArrowRight className="w-3 h-3" />
         </Link>
-      </section>
+      </div>
 
-      {/* Explore Categories */}
-      <section className="mb-10">
-        <h2 className="text-base font-semibold text-stone-800 mb-3">Explore</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+      {/* Category Grid */}
+      <div className="px-4 mb-8">
+        <h2 className="text-base font-semibold text-ivory mb-3">Explore</h2>
+        <div className="grid grid-cols-2 gap-2">
           {categories.map((cat) => (
             <Link
               key={cat.id}
               href={`/${cat.id}`}
-              className={`bg-gradient-to-br ${cat.color} text-white rounded-xl p-4 text-center hover:scale-[1.03] transition-transform`}
+              className="bg-temple border border-dusk rounded-xl p-4 text-center hover:border-saffron/30 transition-colors"
             >
               <span className="text-2xl block mb-1">{cat.icon}</span>
-              <span className="text-sm font-semibold block">{cat.name}</span>
+              <span className="text-xs font-semibold text-ivory block">{cat.name}</span>
             </Link>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* Journey Paths */}
-      <section className="mb-10">
-        <h2 className="text-base font-semibold text-stone-800 mb-3">Start a Journey</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      {/* Journeys */}
+      <div className="px-4 mb-8">
+        <h2 className="text-base font-semibold text-ivory mb-3">Start a Journey</h2>
+        <div className="space-y-2">
           {journeyPaths.map((journey) => (
             <Link
               key={journey.id}
               href={`/journey/${journey.id}`}
-              className="bg-white rounded-xl border border-stone-200 p-4 hover:border-orange-300 hover:shadow-sm transition-all"
+              className="flex items-center justify-between bg-temple border border-dusk rounded-xl p-4 hover:border-saffron/50 transition-colors"
             >
-              <h3 className="text-sm font-semibold text-stone-800">{journey.title}</h3>
-              <p className="text-xs text-stone-500 mt-1">{journey.description}</p>
-              <div className="flex items-center gap-1 mt-2 text-xs text-orange-600">
-                {journey.steps.length} steps <ArrowRight className="w-3 h-3" />
+              <div>
+                <h3 className="text-sm font-semibold text-ivory">{journey.title}</h3>
+                <p className="text-xs text-moon mt-0.5">{journey.steps.length} steps</p>
               </div>
+              <ArrowRight className="w-4 h-4 text-moon" />
             </Link>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* Featured Today */}
-      <section>
-        <h2 className="text-base font-semibold text-stone-800 mb-3">✨ Featured for You</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featured.length > 0 ? (
-            featured.map((video: any) => (
-              <VideoCard key={video.id} video={video} />
-            ))
-          ) : (
-            <p className="text-stone-400 col-span-full text-center py-8">Loading...</p>
-          )}
-        </div>
-      </section>
+      {/* Content Rails */}
+      {rails.map((rail) => (
+        <ContentRail key={rail.title} title={rail.title} videos={rail.videos} href={rail.href} />
+      ))}
     </div>
   );
 }

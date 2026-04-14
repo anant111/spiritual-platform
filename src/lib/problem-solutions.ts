@@ -4,7 +4,6 @@ export const problemSolutions: ProblemSolution[] = [
   {
     id: 'anxiety',
     problem: 'Anxiety & Overthinking',
-    problemHindi: 'चिंता और अधिक सोचना',
     icon: '🌊',
     description: "When your mind won't stop, these ancient techniques help you find stillness.",
     traditionContext: 'In the Bhagavad Gita (Ch 6, Verse 34), Arjuna asks Krishna: "The mind is restless, turbulent, powerful, and obstinate." Krishna replies that through practice (abhyasa) and detachment (vairagya), the mind can be steadied. Patanjali\'s Yoga Sutras (1.2) state: "Yoga chitta vritti nirodha" — yoga is the calming of the fluctuations of the mind. The tradition teaches that anxiety is not a flaw; it is the mind\'s natural restlessness that can be trained, like a muscle.',
@@ -26,7 +25,6 @@ export const problemSolutions: ProblemSolution[] = [
   {
     id: 'grief',
     problem: 'Grief & Loss',
-    problemHindi: 'शोक और हानि',
     icon: '🕊️',
     description: 'When you have lost someone or something irreplaceable.',
     traditionContext: 'Krishna\'s teaching to Arjuna in the Gita (Ch 2, Verse 22): "As a person sheds worn-out garments and wears new ones, the soul sheds worn-out bodies and enters new ones." The tradition does not ask you to "get over" grief — it offers a larger frame of understanding. The Gita teaches that the Atman (soul) is eternal and cannot be destroyed. Grief is the mind\'s attachment, not the soul\'s reality. Practices like tarpan, lighting a diya for the departed, and reading the Gita\'s teachings on the eternal self provide genuine comfort.',
@@ -45,7 +43,6 @@ export const problemSolutions: ProblemSolution[] = [
   {
     id: 'sleep',
     problem: 'Sleep Issues',
-    problemHindi: 'नींद न आना',
     icon: '🌙',
     description: 'When you lie awake despite being exhausted.',
     traditionContext: 'Yogic tradition recognizes sleep disturbances as a sign of Vata imbalance (movement energy gone wild) and rajasic (overactive) mind. The Gita (Ch 14) discusses the three gunas — and recommends sattvic (pure, calm) practices before bed. Yoga Nidra ("yogic sleep") is a 5,000-year-old technique specifically for deep rest and sleep issues. Hanuman Chalisa before bed is a traditional practice millions of Indians swear by for peaceful sleep.',
@@ -65,7 +62,6 @@ export const problemSolutions: ProblemSolution[] = [
   {
     id: 'focus',
     problem: 'Lack of Focus',
-    problemHindi: 'ध्यान नहीं लगना',
     icon: '🎯',
     description: "When you can't concentrate on work, study, or anything important.",
     traditionContext: 'Gita Ch 6, Verse 26: "Yato yato niscalati manas cancalam asthiram. Tatas tato niyamyaitad atmany eva vasam nayet" — "Wherever this restless, unsteady mind wanders, bring it back and focus it on the Self." Patanjali\'s Yoga Sutras describe Dharana (concentration) as the 6th limb of yoga — the practice of binding awareness to a single point. Trataka (gazing meditation) is the traditional yogic technique for training focus.',
@@ -85,7 +81,6 @@ export const problemSolutions: ProblemSolution[] = [
   {
     id: 'anger',
     problem: 'Anger & Frustration',
-    problemHindi: 'क्रोध और निराशा',
     icon: '🔥',
     description: 'When anger gets the better of you and you regret it later.',
     traditionContext: 'Gita Ch 2, Verse 63: "Krodhad bhavati sammohah sammohat smriti-vibhramah" — "From anger comes delusion, from delusion comes loss of memory, from loss of memory comes destruction of intelligence." The tradition teaches that anger is born of unfulfilled desire (kama) and attachment to outcomes. The prescription is not suppression — it is substitution. When anger arises, shift awareness to breath and chant a cooling mantra. Shiva is the transformer of anger into awareness.',
@@ -105,7 +100,6 @@ export const problemSolutions: ProblemSolution[] = [
   {
     id: 'loneliness',
     problem: 'Loneliness',
-    problemHindi: 'अकेलापन',
     icon: '🌑',
     description: 'When you feel no one truly understands or is with you.',
     traditionContext: 'The Upanishads teach that the deepest loneliness comes from forgetting that the Atman (your true self) is never alone — it is one with Brahman (the infinite). Gita Ch 6, Verse 29: "One who sees the Self in all beings, and all beings in the Self, sees the same everywhere." Devotion practices reframe loneliness as the longing of the soul for the divine — this is actually a spiritual blessing in disguise. Bhakti saints like Meera Bai and Tulsidas channeled loneliness into the most beautiful devotional poetry India has produced.',
