@@ -1,6 +1,7 @@
-import { ArrowLeft, Share2, MessageCircle, ArrowRight } from 'lucide-react';
+import { ArrowLeft, MessageCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { searchByQuery } from '@/lib/youtube';
+import { WhatsAppShareButton } from '@/components/WhatsAppShareButton';
 
 export default async function WatchPage({ params }: { params: Promise<{ videoId: string }> }) {
   const { videoId } = await params;
@@ -26,12 +27,7 @@ export default async function WatchPage({ params }: { params: Promise<{ videoId:
       </div>
 
       <div className="flex gap-3 mb-6">
-        <button
-          onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent('https://youtube.com/watch?v=' + videoId)}`, '_blank')}
-          className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 text-sm"
-        >
-          <Share2 className="w-4 h-4" /> Share on WhatsApp
-        </button>
+        <WhatsAppShareButton url={`https://youtube.com/watch?v=${videoId}`} label="Share on WhatsApp" />
       </div>
 
       <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-xl p-4 mb-6">
@@ -40,9 +36,9 @@ export default async function WatchPage({ params }: { params: Promise<{ videoId:
           <h3 className="text-sm font-semibold text-purple-800">What did this teaching mean for you?</h3>
         </div>
         <p className="text-xs text-stone-600 mb-3">Take a moment. Write one thought, one feeling, or one question that arose.</p>
-        <button className="text-xs text-purple-600 font-medium hover:text-purple-700">
+        <span className="text-xs text-purple-600 font-medium">
           Write a reflection →
-        </button>
+        </span>
       </div>
 
       {nextVideos.length > 0 && (
