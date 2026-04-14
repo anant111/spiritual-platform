@@ -21,8 +21,8 @@ export function ContentRail({ title, videos, href }: Props) {
       </div>
       <div className="flex gap-2.5 overflow-x-auto no-scrollbar px-4 scroll-smooth snap-x snap-mandatory pb-1">
         {videos.map((video: any) => (
-          <div key={video.id} className="snap-start shrink-0 w-[130px]">
-            <VideoCard video={video} variant="square" />
+          <div key={video.id} className="snap-start shrink-0 w-[200px]">
+            <VideoCard video={video} variant="landscape" />
           </div>
         ))}
       </div>

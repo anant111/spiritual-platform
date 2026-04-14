@@ -3,8 +3,9 @@ import { JourneyPath } from './types';
 export const journeyPaths: JourneyPath[] = [
   {
     id: 'gita-journey',
-    title: 'Bhagavad Gita — Complete Journey',
+    title: 'Bhagavad Gita',
     description: 'Go through the Gita chapter by chapter with guided explanations',
+    icon: '📖',
     steps: [
       { number: 1, title: "Arjuna's Despair (Ch 1)", description: 'Understanding the crisis that leads to spiritual seeking', youtubeQuery: 'bhagavad gita chapter 1 explained arjuna vishada yoga', level: 'start' },
       { number: 2, title: 'The Eternal Soul (Ch 2)', description: "Krishna's first teaching: the soul never dies", youtubeQuery: 'bhagavad gita chapter 2 sankhya yoga soul eternal', level: 'practice' },
@@ -16,8 +17,9 @@ export const journeyPaths: JourneyPath[] = [
   },
   {
     id: 'meditation-journey',
-    title: 'Meditation — From Beginner to Deep Practice',
+    title: 'Meditation',
     description: 'A progressive meditation path — start with 5 minutes, grow to deep practice',
+    icon: '🧘',
     steps: [
       { number: 1, title: 'Breath Awareness', description: 'Start with 5 minutes of simply watching your breath', youtubeQuery: 'beginner meditation breath awareness 5 minutes hindi', level: 'start' },
       { number: 2, title: 'Om Chanting Meditation', description: 'Using sound vibration to quiet the mind', youtubeQuery: 'om chanting meditation guided 15 minutes hindi', level: 'practice' },
@@ -28,8 +30,9 @@ export const journeyPaths: JourneyPath[] = [
   },
   {
     id: 'hanuman-devotion',
-    title: 'Hanuman Sadhana — 7 Days of Devotion',
+    title: 'Hanuman Sadhana',
     description: 'A weekly practice to build strength, courage, and devotion through Hanuman worship',
+    icon: '🙏',
     steps: [
       { number: 1, title: 'Day 1: Understanding Hanuman', description: 'Who is Hanuman and why is he the god of strength and devotion?', youtubeQuery: 'hanuman ji story significance who is hanuman hindi', level: 'start' },
       { number: 2, title: 'Day 2: Hanuman Chalisa', description: 'Learn and recite the Hanuman Chalisa with meaning', youtubeQuery: 'hanuman chalisa with meaning explained hindi', level: 'practice' },

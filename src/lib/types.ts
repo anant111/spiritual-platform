@@ -31,6 +31,7 @@ export interface JourneyPath {
   title: string;
   description: string;
   steps: JourneyStep[];
+  icon: string;
 }
 
 export interface JourneyStep {
@@ -49,5 +50,19 @@ export interface ProblemSolution {
   traditionContext: string;
   practice: string;
   practiceSteps: string[];
+  youtubeQuery: string;
+}
+
+export interface Feeling {
+  id: string;
+  label: string;
+  emoji: string;
+  youtubeQuery: string;
+  causes: FeelingCause[];
+}
+
+export interface FeelingCause {
+  id: string;
+  label: string;
   youtubeQuery: string;
 }
