@@ -2,7 +2,6 @@ import { categories } from '@/lib/categories';
 import { spiritualNeeds } from '@/lib/spiritual-needs';
 import { problemSolutions } from '@/lib/problem-solutions';
 import { journeyPaths } from '@/lib/journey-paths';
-import { VideoCard } from '@/components/VideoCard';
 import { ContentRail } from '@/components/ContentRail';
 import { HeroCarousel } from '@/components/HeroCarousel';
 import { searchByQuery } from '@/lib/youtube';
@@ -10,14 +9,23 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 async function getCarouselSlides() {
-  return spiritualNeeds.map((need) => ({
-    id: need.id,
-    title: need.title,
-    description: need.description,
-    thumbnail: '',
-    youtubeQuery: need.youtubeQuery,
-    icon: need.icon,
-  }));
+  const slides = [];
+  for (const need of spiritualNeeds) {
+    let thumbnail = '';
+    try {
+      const videos = await searchByQuery(need.youtubeQuery, 1);
+      if (videos[0]) thumbnail = videos[0].thumbnail;
+    } catch {}
+    slides.push({
+      id: need.id,
+      title: need.title,
+      description: need.description,
+      thumbnail,
+      youtubeQuery: need.youtubeQuery,
+      icon: need.icon,
+    });
+  }
+  return slides;
 }
 
 async function getRails() {
@@ -30,10 +38,10 @@ async function getRails() {
   ]);
 
   return [
-    { title: 'Featured for You', videos: featured, href: '/search?q=spiritual+wisdom' },
-    { title: 'Bhajans & Devotion', videos: bhajans, href: '/bhajans' },
-    { title: 'Meditation & Mantra', videos: meditation, href: '/meditation' },
-    { title: 'Gita & Vedic Wisdom', videos: gita, href: '/gita' },
+    { title: 'Featured', videos: featured, href: '/search?q=spiritual+wisdom' },
+    { title: 'Bhajans', videos: bhajans, href: '/bhajans' },
+    { title: 'Meditation', videos: meditation, href: '/meditation' },
+    { title: 'Gita', videos: gita, href: '/gita' },
     { title: 'Guru Wisdom', videos: talks, href: '/talks' },
   ];
 }
@@ -47,22 +55,21 @@ export default async function HomePage() {
 
   return (
     <div>
-      {/* Hero Carousel — edge to edge */}
+      {/* Hero Carousel */}
       <HeroCarousel slides={slides} />
 
       {/* Greeting */}
-      <div className="px-4 mt-6 mb-4">
-        <h1 className="text-xl font-bold text-ivory">{greeting}</h1>
-        <p className="text-sm text-stone mt-0.5">Where would you like your journey to go today?</p>
+      <div className="px-4 mt-5 mb-3">
+        <h1 className="text-lg font-bold text-ivory">{greeting}</h1>
       </div>
 
-      {/* Quick Intent Buttons */}
-      <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 mb-8">
+      {/* Quick Intent */}
+      <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 mb-6">
         {spiritualNeeds.map((need) => (
           <Link
             key={need.id}
             href={`/search?q=${encodeURIComponent(need.youtubeQuery)}`}
-            className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-temple border border-dusk rounded-full text-sm font-medium text-ivory hover:border-saffron hover:text-saffron transition-colors"
+            className="shrink-0 flex items-center gap-1.5 px-3 py-2 bg-temple border border-dusk rounded-full text-xs font-medium text-ivory hover:border-saffron hover:text-saffron transition-colors"
           >
             <span>{need.icon}</span> {need.title}
           </Link>
@@ -70,8 +77,8 @@ export default async function HomePage() {
       </div>
 
       {/* Find Help */}
-      <div className="px-4 mb-8">
-        <h2 className="text-base font-semibold text-ivory mb-3">Find spiritual help</h2>
+      <div className="px-4 mb-6">
+        <h2 className="text-sm font-semibold text-ivory mb-2">Need help?</h2>
         <div className="grid grid-cols-1 gap-2">
           {problemSolutions.slice(0, 3).map((sol) => (
             <Link
@@ -79,50 +86,47 @@ export default async function HomePage() {
               href={`/help/${sol.id}`}
               className="flex items-center gap-3 bg-temple border border-dusk rounded-xl p-3 hover:border-saffron/50 transition-colors"
             >
-              <span className="text-2xl shrink-0">{sol.icon}</span>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-ivory">{sol.problem}</p>
-                <p className="text-xs text-moon truncate">{sol.description}</p>
-              </div>
+              <span className="text-xl shrink-0">{sol.icon}</span>
+              <p className="text-sm font-medium text-ivory flex-1">{sol.problem}</p>
               <ArrowRight className="w-4 h-4 text-moon shrink-0" />
             </Link>
           ))}
         </div>
         <Link href="/help" className="flex items-center gap-1 text-xs text-saffron mt-2 hover:text-saffron-deep font-medium">
-          See all problems <ArrowRight className="w-3 h-3" />
+          See all <ArrowRight className="w-3 h-3" />
         </Link>
       </div>
 
-      {/* Category Grid */}
-      <div className="px-4 mb-8">
-        <h2 className="text-base font-semibold text-ivory mb-3">Explore</h2>
-        <div className="grid grid-cols-2 gap-2">
+      {/* Categories */}
+      <div className="px-4 mb-6">
+        <h2 className="text-sm font-semibold text-ivory mb-2">Explore</h2>
+        <div className="grid grid-cols-3 gap-2">
           {categories.map((cat) => (
             <Link
               key={cat.id}
               href={`/${cat.id}`}
-              className="bg-temple border border-dusk rounded-xl p-4 text-center hover:border-saffron/30 transition-colors"
+              className="bg-temple border border-dusk rounded-xl p-3 text-center hover:border-saffron/30 transition-colors"
             >
-              <span className="text-2xl block mb-1">{cat.icon}</span>
-              <span className="text-xs font-semibold text-ivory block">{cat.name}</span>
+              <span className="text-xl block mb-0.5">{cat.icon}</span>
+              <span className="text-[11px] font-medium text-ivory block">{cat.name}</span>
             </Link>
           ))}
         </div>
       </div>
 
       {/* Journeys */}
-      <div className="px-4 mb-8">
-        <h2 className="text-base font-semibold text-ivory mb-3">Start a Journey</h2>
+      <div className="px-4 mb-6">
+        <h2 className="text-sm font-semibold text-ivory mb-2">Journeys</h2>
         <div className="space-y-2">
           {journeyPaths.map((journey) => (
             <Link
               key={journey.id}
               href={`/journey/${journey.id}`}
-              className="flex items-center justify-between bg-temple border border-dusk rounded-xl p-4 hover:border-saffron/50 transition-colors"
+              className="flex items-center justify-between bg-temple border border-dusk rounded-xl p-3 hover:border-saffron/50 transition-colors"
             >
               <div>
-                <h3 className="text-sm font-semibold text-ivory">{journey.title}</h3>
-                <p className="text-xs text-moon mt-0.5">{journey.steps.length} steps</p>
+                <h3 className="text-sm font-medium text-ivory">{journey.title}</h3>
+                <p className="text-[11px] text-moon">{journey.steps.length} steps</p>
               </div>
               <ArrowRight className="w-4 h-4 text-moon" />
             </Link>

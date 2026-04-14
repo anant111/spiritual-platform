@@ -28,46 +28,33 @@ export default async function WatchPage({ params }: { params: Promise<{ videoId:
           />
         </div>
 
-        {/* Content below player */}
         <div className="px-4 py-4 max-w-3xl mx-auto">
           <div className="flex items-center justify-between mb-4">
-            <Link href="/" className="flex items-center gap-1 text-moon hover:text-ivory transition-colors text-sm">
-              <ArrowLeft className="w-4 h-4" /> Back
+            <Link href="/" className="flex items-center gap-1 text-moon hover:text-ivory transition-colors text-xs">
+              <ArrowLeft className="w-3.5 h-3.5" /> Back
             </Link>
             <ShareButton url={`/watch/${videoId}`} label="Share" />
           </div>
 
-          {/* Reflection */}
-          <div className="bg-temple border border-dusk rounded-xl p-4 mb-6">
-            <div className="flex items-center gap-2 mb-2">
-              <MessageCircle className="w-4 h-4 text-third-eye" />
-              <h3 className="text-sm font-semibold text-ivory">What did this teaching mean for you?</h3>
+          <div className="bg-temple border border-dusk rounded-xl p-3 mb-5">
+            <div className="flex items-center gap-2 mb-1">
+              <MessageCircle className="w-3.5 h-3.5 text-third-eye" />
+              <h3 className="text-xs font-semibold text-ivory">What did this mean for you?</h3>
             </div>
-            <p className="text-xs text-stone mb-2">Take a moment. Write one thought, one feeling, or one question that arose.</p>
-            <span className="text-xs text-third-eye font-medium">Write a reflection →</span>
+            <p className="text-[11px] text-moon">Write one thought, feeling, or question that arose.</p>
+            <span className="text-[11px] text-third-eye font-medium">Write a reflection →</span>
           </div>
 
-          {/* Next Steps */}
           {nextVideos.length > 0 && (
             <div>
-              <h3 className="text-base font-semibold text-ivory mb-3">Continue your journey</h3>
+              <h3 className="text-xs font-semibold text-ivory mb-2">Continue</h3>
               <div className="grid grid-cols-3 gap-2">
                 {nextVideos.map((v: any) => (
-                  <Link
-                    key={v.id}
-                    href={`/watch/${v.id}`}
-                    className="group block"
-                  >
+                  <Link key={v.id} href={`/watch/${v.id}`} className="group block">
                     <div className="aspect-square rounded-lg overflow-hidden">
-                      <img
-                        src={v.thumbnail}
-                        alt={v.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
+                      <img src={v.thumbnail} alt={v.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                     </div>
-                    <p className="text-xs font-medium text-ivory line-clamp-2 mt-1.5 group-hover:text-saffron transition-colors">{v.title}</p>
-                    <p className="text-[10px] text-moon mt-0.5">{v.channelTitle}</p>
+                    <p className="text-[11px] font-medium text-ivory line-clamp-2 mt-1 group-hover:text-saffron transition-colors">{v.title}</p>
                   </Link>
                 ))}
               </div>
