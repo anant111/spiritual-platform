@@ -11,7 +11,7 @@ export function Footer() {
   const blessing = blessings[today % blessings.length];
 
   return (
-    <footer className="bg-temple border-t border-dusk py-8 mt-8">
+    <footer id="site-footer" className="bg-temple border-t border-dusk py-8 mt-8">
       <div className="max-w-5xl mx-auto px-4">
         <div className="bg-altar/50 rounded-xl p-4 mb-6 border border-dusk">
           <p className="text-sm text-stone text-center italic">{blessing}</p>

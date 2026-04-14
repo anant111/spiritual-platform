@@ -22,11 +22,11 @@ async function getCarouselSlides() {
 
 async function getRails() {
   const [featured, bhajans, meditation, gita, talks] = await Promise.all([
-    searchByQuery('spiritual wisdom morning peace devotion', 15).catch(() => []),
-    searchByQuery('hanuman chalisa krishna bhajan devotional', 15).catch(() => []),
-    searchByQuery('guided meditation om chanting mantra', 15).catch(() => []),
-    searchByQuery('bhagavad gita chapter explained vedanta', 15).catch(() => []),
-    searchByQuery('sadhguru spiritual wisdom life guidance', 15).catch(() => []),
+    searchByQuery('hanuman chalisa OR om namah shivaya OR gayatri mantra', 15).catch(() => []),
+    searchByQuery('hanuman chalisa OR krishna bhajan OR aarti hindi', 15).catch(() => []),
+    searchByQuery('om meditation guided OR yoga nidra OR mantra chanting', 15).catch(() => []),
+    searchByQuery('bhagavad gita chapter explanation hindi OR vedanta teaching', 15).catch(() => []),
+    searchByQuery('sadhguru wisdom OR swami vivekananda OR sri sri ravi shankar', 15).catch(() => []),
   ]);
 
   return [

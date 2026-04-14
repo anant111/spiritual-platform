@@ -15,7 +15,7 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-void/95 backdrop-blur-md border-t border-dusk md:hidden z-50">
+    <nav id="bottom-nav" className="fixed bottom-0 left-0 right-0 bg-void/95 backdrop-blur-md border-t border-dusk md:hidden z-50">
       <div className="flex justify-around py-2">
         {links.map((link) => {
           const Icon = link.icon;
